@@ -74,15 +74,32 @@ namespace ConsoleApp2
             var intGenerator = RandomizerFactory.GetRandomizer(new FieldOptionsInteger());
             var firstNameGenerator = RandomizerFactory.GetRandomizer(new FieldOptionsFirstName());
             var lastNameGenerator = RandomizerFactory.GetRandomizer(new FieldOptionsLastName());
-
+            /*
             Osoba random = new Osoba(
                 intGenerator.Generate().Value,
                 firstNameGenerator.Generate(),
                 lastNameGenerator.Generate()
                 );
 
-            Console.WriteLine($"{random.id}: {random.imie} {random.nazwisko}");
+            Console.WriteLine($"{random.id}: {random.imie} {random.nazwisko}");*/
 
+            //100 osob + sortowanie po nazwisku
+            var list = new List<Osoba>();
+
+            for (int i = 0; i <= 100; i++)
+            {
+                list.Add(new Osoba(
+                    i,
+                    firstNameGenerator.Generate(),
+                    lastNameGenerator.Generate()));
+            }
+
+            var posortowane = list.OrderBy(x => x.imie).ToList();
+
+            foreach (var item in posortowane)
+            {
+                Console.WriteLine($"{item.id}: {item.imie} {item.nazwisko}");
+            }
         }
     }
 }
